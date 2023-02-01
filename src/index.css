@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    background-color: inherit !important;
+  }
+  html {
+    font-family: 'Lato';
+    background: #fff;
+    /* max-height: 100%; */
+    /* overflow-y: hidden; */
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+#sidebar {
+  --tw-translate-x: -100%;
+}
+#menu-close-icon {
+  display: none;
+}
+
+#menu-open:checked ~ #sidebar {
+  --tw-translate-x: 0;
+}
+#menu-open:checked ~ * #mobile-menu-button {
+  background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
+}
+#menu-open:checked ~ * #menu-open-icon {
+  display: none;
+}
+#menu-open:checked ~ * #menu-close-icon {
+  display: block;
+}
+
+@media (min-width: 1268px) {
+  #sidebar {
+      --tw-translate-x: 0;
+  }
+}
+.nav-item:hover path,
+.top-bar-item:hover path {
+  fill: #fff !important;
+  cursor: pointer;
+}
+
+.sidenav {
+  /* height: calc(100vh - 90px); */
+  height: 100vh;
+}
+
+.shim-green {
+  position: relative;
+  overflow: hidden;
+  background-color: #EC6660;
+}
+
+#content {
+  max-width: 1484px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  html {
+    overflow-y: scroll;
+  }
+  body {
+   background-size: cover;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  html {
+    overflow-y: scroll;
+  }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #4AA36F;
+  -webkit-transition: .4s;
+  transition: .4s;
+   border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #16A34A;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(55px);
+}
+
+/*------ ADDED CSS ---------*/
+.slider:after
+{
+ content:'SKU';
+ color: white;
+ display: block;
+ position: absolute;
+ transform: translate(-50%,-50%);
+ top: 50%;
+ left: 50%;
+ font-size: 10px;
+ font-family: Verdana, sans-serif;
+}
+
+input:checked + .slider:after
+{  
+  content:'KW';
+}
+
+/*--------- END --------*/
+
+.active {
+  background-color: #16A34A;
+}
+
+.close-box {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+#sidebar {
+  overflow-x: hidden;
+}
