@@ -7,8 +7,8 @@ export default function Login(): React.ReactElement {
     const {apiData, setApiData} = useContext(ApiContext) as ApiContextType;
 
     const redirectToLogin = async () => {
-      const url = 'http://127.0.0.1:8000'
-      // const url = 'https://ksh.dev'
+      // const url = 'http://127.0.0.1:8000'
+      const url = 'https://ksh.dev'
 
     // @ts-ignore
         window.location = `https://discord.com/oauth2/authorize?client_id=1053517227783098488&redirect_uri=${url}/callback&response_type=code&scope=identify`
@@ -25,8 +25,8 @@ export default function Login(): React.ReactElement {
         setApiData(res.clients);
       })
       .catch((err) => {
-          console.error("error in api", err)
-          // alert("Error fetching user info");
+          // console.error("error in api", err)
+          alert("Error fetching user info");
       });
   };
     if(apiData){
