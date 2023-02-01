@@ -2,19 +2,14 @@ import React, {useContext} from "react";
 import {ApiContext, ApiContextType} from "../../contexts/ApiContext";
 import Dashboard from "./Dashboard";
 import {Navigate} from "react-router-dom";
+import {SERVER_URL} from "../../utils/constants";
 
 export default function Login(): React.ReactElement {
     const {apiData, setApiData} = useContext(ApiContext) as ApiContextType;
 
     const redirectToLogin = async () => {
-      // const url = 'http://127.0.0.1:8000'
-      const url = 'https://ksh.dev'
-
-    // @ts-ignore
-        window.location = `https://discord.com/oauth2/authorize?client_id=1053517227783098488&redirect_uri=${url}/callback&response_type=code&scope=identify`
-
     // TEMPORARY
-    fetch(`${url}/load`, {
+    fetch(`${SERVER_URL}/load`, {
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
@@ -25,7 +20,9 @@ export default function Login(): React.ReactElement {
         setApiData(res.clients);
       })
       .catch((err) => {
-          // console.error("error in api", err)
+          // @ts-ignore
+          window.location = `https://discord.com/oauth2/authorize?client_id=1053517227783098488&redirect_uri=${url}/callback&response_type=code&scope=identify`
+          console.error("error in loading data", err)
           alert("Error fetching user info");
       });
   };
