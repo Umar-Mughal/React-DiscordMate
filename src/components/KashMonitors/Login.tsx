@@ -8,23 +8,27 @@ export default function Login(): React.ReactElement {
     const {apiData, setApiData} = useContext(ApiContext) as ApiContextType;
 
     const redirectToLogin = async () => {
-    // TEMPORARY
-    fetch(`${SERVER_URL}/load`, {
-        credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setApiData(res.clients);
-      })
-      .catch((err) => {
-          // @ts-ignore
-          window.location = `https://discord.com/oauth2/authorize?client_id=1053517227783098488&redirect_uri=${url}/callback&response_type=code&scope=identify`
-          console.error("error in loading data", err)
-          alert("Error fetching user info");
-      });
+        
+        // @ts-ignore
+        window.location = `https://discord.com/oauth2/authorize?client_id=1053517227783098488&redirect_uri=${SERVER_URL}/callback&response_type=code&scope=identify`
+
+    // // TEMPORARY
+    // fetch(`${SERVER_URL}/load`, {
+    //     credentials: 'include',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    // })
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     setApiData(res.clients);
+    //   })
+    //   .catch((err) => {
+    //
+    //
+    //       console.error("error in loading data", err)
+    //       alert("Error fetching user info");
+    //   });
   };
     if(apiData){
         return <Navigate to="/dashboard" />
