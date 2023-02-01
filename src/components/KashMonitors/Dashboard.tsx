@@ -10,6 +10,7 @@ export default function Dashboard(): ReactElement {
   if(!apiData) {
     return <Navigate to="/login" />
   }
+
   return (
     <div className="App min-h-screen bg-[#141E21]">
       <div className="relative sidenav xl:flex" data-dev-hint="container">
@@ -21,7 +22,7 @@ export default function Dashboard(): ReactElement {
           <div className="">
             <div className="px-4 py-6 sm:px-0">
               <div className=" monitor-container overflow-hidden mt-12 flex flex-col  gap-7  ">
-                {apiData && apiData.length > 1 && apiData.clients.map((clientData: any, clientIndex: number): React.ReactElement => {
+                {apiData && apiData.clients.length > 1 && apiData.clients.map((clientData: any, clientIndex: number): React.ReactElement => {
                   return (
                     <MonitorContainer
                       apiData={apiData}

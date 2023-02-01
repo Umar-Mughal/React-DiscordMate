@@ -10,6 +10,8 @@ export const ApiContext = createContext<ApiContextType | null>(null);
 
 function ApiContextProvider({children}: any): React.ReactElement{
 
+    const [apiData,setApiData]= useState(null)
+
     const checkAuth = () => {
         fetch(`${SERVER_URL}/load`, {
             credentials: 'include',
@@ -30,7 +32,6 @@ function ApiContextProvider({children}: any): React.ReactElement{
         checkAuth()
     },[])
 
-    const [apiData,setApiData]= useState(null)
     return(
         <ApiContext.Provider value={{apiData, setApiData}}>
             {children}
