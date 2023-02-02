@@ -1,6 +1,7 @@
 import React, {FC, useEffect} from 'react'
 import {Navigate, useSearchParams} from "react-router-dom";
 import useApi from "../hooks/useApi";
+import {SERVER_URL} from "../utils/constants";
 
 const Callback: FC = (): JSX.Element => {
     const [searchParams] = useSearchParams()
@@ -15,11 +16,25 @@ const Callback: FC = (): JSX.Element => {
 
 
     const setCookie = async (code: string): Promise<void> => {
-        await call({ url: '/callback',
-            params: {
-                code,
+        // await call({
+        //     url: '/callback',
+        //     params: {
+        //         code,
+        //     },
+        // })
+
+        fetch(`${SERVER_URL}/callback`, {
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
             },
         })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log("Callback api response:", res)
+            })
+            .catch((err) => {
+            });
     }
 
     useEffect(() => {
