@@ -39,7 +39,7 @@ const StoreList: FC<IStoreListProps> = ({}): JSX.Element => {
 
   const handleClick = async (store: IStoreList) => {
     const response = await call({
-      url: `/id/${ params.id}`,
+      url: params.id,
       params: {
         type: store.name.toLowerCase(),
       },
@@ -51,6 +51,7 @@ const StoreList: FC<IStoreListProps> = ({}): JSX.Element => {
   }
 
   useEffect(() => {
+    console.log('param sss=', params)
     if (rawResponse) {
       console.log(rawResponse)
       if(rawResponse && rawResponse.data.message){
