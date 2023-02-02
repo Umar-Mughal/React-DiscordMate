@@ -32,9 +32,7 @@ const Callback: FC = (): JSX.Element => {
         if (rawResponse) {
             console.log(rawResponse)
             if(rawResponse && rawResponse.data.message){
-               <Navigate to="/dashboard" />
-                // @ts-ignore
-                window.location = `${rawResponse.data.message}`
+               // <Navigate to="/dashboard" />
             }
         }
     }, [rawResponse])
