@@ -16,26 +16,26 @@ const Callback: FC = (): JSX.Element => {
 
 
     const setCookie = async (code: string): Promise<void> => {
-        // await call({
-        //     url: '/callback',
-        //     params: {
-        //         code,
-        //     },
-        // })
-
-        fetch(`${SERVER_URL}/callback`, {
-            mode: 'no-cors',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
+        await call({
+            url: '/callback',
+            params: {
+                code,
             },
         })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log("Callback api response:", res)
-            })
-            .catch((err) => {
-            });
+
+        // fetch(`${SERVER_URL}/callback`, {
+        //     mode: 'no-cors',
+        //     credentials: 'include',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        // })
+        //     .then((res) => res.json())
+        //     .then((res) => {
+        //         console.log("Callback api response:", res)
+        //     })
+        //     .catch((err) => {
+        //     });
     }
 
     useEffect(() => {
