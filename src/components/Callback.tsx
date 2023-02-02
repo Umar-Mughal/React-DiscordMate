@@ -25,9 +25,10 @@ const Callback: FC = (): JSX.Element => {
        //          "Access-Control-Allow-Origin": `${FRONTEND_URL}`
        //      },
        //  })
-        
+
         const response = await axios.get(
-            `${SERVER_URL}/callback?code=${code}`,
+            // `${SERVER_URL}/callback?code=${code}`,
+            `${SERVER_URL}/set_cookie?code=${code}`,
             {
                 data: {
                     code
