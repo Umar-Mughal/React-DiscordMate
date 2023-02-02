@@ -31,7 +31,8 @@ const Callback: FC = (): JSX.Element => {
             },
         );
 
-        setCookieLocal('jwt_token', response.data.token, 60)
+        setCookieLocal('jwt_token', response.data.jwt_token, 60)
+        console.log("1-------------", response.data.jwt_token)
         console.log("callback response-------------", response)
     }
     function setCookieLocal(name: string, value: CancelToken, days: number) {
@@ -45,14 +46,15 @@ const Callback: FC = (): JSX.Element => {
         document.cookie = name + "=" + (value || "")  + expires + "; path=/";
     }
 
-    useEffect(() => {
-        setCookie('123')
-    }, [])
     // useEffect(() => {
-    //     if(code){
-    //         setCookie(code)
-    //     }
-    // }, [code])
+    //     setCookie('123')
+    // }, [])
+
+    useEffect(() => {
+        if(code){
+            setCookie(code)
+        }
+    }, [code])
 
     useEffect(() => {
         if (rawResponse) {
