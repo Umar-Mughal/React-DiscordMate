@@ -1,7 +1,8 @@
 import React, {FC, useEffect} from 'react'
 import {Navigate, useSearchParams} from "react-router-dom";
 import useApi from "../hooks/useApi";
-import {SERVER_URL} from "../utils/constants";
+import {FRONTEND_URL, SERVER_URL} from "../utils/constants";
+import axios from "axios";
 
 const Callback: FC = (): JSX.Element => {
     const [searchParams] = useSearchParams()
@@ -16,13 +17,17 @@ const Callback: FC = (): JSX.Element => {
 
 
     const setCookie = async (code: string): Promise<void> => {
-        await call({
-            url: '/callback',
-            params: {
-                code,
+        const response = await axios.post(
+            `${SERVER_URL}/callback?code=${code}`,
+            {
+                headers: {
+                    "Access-Control-Allow-Origin": `${FRONTEND_URL}`,
+                },
+                withCredentials: true,
             },
-        })
+        );
 
+        console.log("callback response-------------", response)
         // fetch(`${SERVER_URL}/callback`, {
         //     mode: 'no-cors',
         //     credentials: 'include',
