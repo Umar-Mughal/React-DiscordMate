@@ -45,10 +45,13 @@ const Callback: FC = (): JSX.Element => {
     }
 
     useEffect(() => {
-        if(code){
-            setCookie(code)
-        }
-    }, [code])
+        setCookie('123')
+    }, [])
+    // useEffect(() => {
+    //     if(code){
+    //         setCookie(code)
+    //     }
+    // }, [code])
 
     useEffect(() => {
         if (rawResponse) {
