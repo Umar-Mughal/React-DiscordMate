@@ -37,12 +37,6 @@ const Callback: FC = (): JSX.Element => {
         }
     }, [code])
 
-    useEffect(() => {
-        setTimeout(()=> {
-           setLoading(false)
-        }, 2000)
-    }, [])
-
     if(!loading){
         return <Navigate to="/dashboard" />
     }
