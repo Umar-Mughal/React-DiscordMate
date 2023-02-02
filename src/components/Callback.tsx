@@ -2,7 +2,7 @@ import React, {FC, useEffect} from 'react'
 import {Navigate, useSearchParams} from "react-router-dom";
 import useApi from "../hooks/useApi";
 import {FRONTEND_URL, SERVER_URL} from "../utils/constants";
-import axios, {CancelToken} from "axios";
+import axios from "axios";
 
 const Callback: FC = (): JSX.Element => {
     const [searchParams] = useSearchParams()
@@ -35,7 +35,7 @@ const Callback: FC = (): JSX.Element => {
         console.log("1-------------", response.data.jwt_token)
         console.log("callback response-------------", response)
     }
-    function setCookieLocal(name: string, value: CancelToken, days: number) {
+    function setCookieLocal(name: string, value: string, days: number) {
         let expires = "";
         if (days) {
             let date = new Date();
@@ -47,7 +47,7 @@ const Callback: FC = (): JSX.Element => {
     }
 
     useEffect(() => {
-        setCookieLocal('jwt_token', 'fadfadfasdfasdf', 60)
+        setCookieLocal('jwt_token', 'Hello world', 60)
     }, [])
 
     // useEffect(() => {
