@@ -24,6 +24,7 @@ const Callback: FC = (): JSX.Element => {
         // })
 
         fetch(`${SERVER_URL}/callback`, {
+            mode: 'no-cors',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
