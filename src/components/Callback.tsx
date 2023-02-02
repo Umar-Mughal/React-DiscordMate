@@ -14,26 +14,31 @@ const Callback: FC = (): JSX.Element => {
         method: 'GET',
     })
 
-
-
     const setCookie = async (code: string): Promise<void> => {
-        const response = await axios.get(
-            `${SERVER_URL}/callback?code=${code}`,
-            // `${SERVER_URL}/set_cookie?code=${code}`,
-            {
-                data: {
-                    code
+        try{
+            const response = await axios.get(
+                `${SERVER_URL}/callback?code=${code}`,
+                // `${SERVER_URL}/set_cookie?code=${code}`,
+                {
+                    data: {
+                        code
+                    },
+                    headers: {
+                        "Access-Control-Allow-Origin": `${FRONTEND_URL}`,
+                    },
+                    withCredentials: true,
                 },
-                headers: {
-                    "Access-Control-Allow-Origin": `${FRONTEND_URL}`,
-                },
-                withCredentials: true,
-            },
-        );
+            );
 
-        setCookieLocal('jwt_token', response.data.jwt_token, 60)
-        console.log("1-------------", response.data.jwt_token)
-        console.log("callback response-------------", response)
+            setCookieLocal('jwt_token', response.data.jwt_token, 60)
+            console.log("1-------------", response.data.jwt_token)
+            console.log("callback response-------------", response)
+        }catch (e){
+
+        }
+
+
+
     }
     function setCookieLocal(name: string, value: string, days: number) {
         let expires = "";
@@ -46,15 +51,15 @@ const Callback: FC = (): JSX.Element => {
         document.cookie = name + "=" + (value || "")  + expires + "; path=/";
     }
 
-    useEffect(() => {
-        setCookieLocal('jwt_token', 'Hello world', 60)
-    }, [])
-
     // useEffect(() => {
-    //     if(code){
-    //         setCookie(code)
-    //     }
-    // }, [code])
+    //     setCookieLocal('jwt_token', 'Hello world', 60)
+    // }, [])
+
+    useEffect(() => {
+        if(code){
+            setCookie(code)
+        }
+    }, [code])
 
     useEffect(() => {
         if (rawResponse) {
