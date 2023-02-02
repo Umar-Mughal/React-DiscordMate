@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     element: <ApiContextProvider><Dashboard /></ApiContextProvider>,
   },
   {
-    path: '/dashboard2',
+    path: '/i/:id',
     element: <ApiContextProvider><Dashboard2 /></ApiContextProvider>,
   },
   {

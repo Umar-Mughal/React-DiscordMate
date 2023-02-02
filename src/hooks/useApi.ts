@@ -14,30 +14,24 @@ const useApi = ({ url, method, data, headers, onSuccess, onError, autoFetch, moc
     setIsLoading(true)
     try {
       const paramsString = Object.entries(callData.params)
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&')
+          .map(([key, value]) => `${key}=${value}`)
+          .join('&')
 
-      // const reqURL = `${!mock ? config.apiUrl + callData.url : callData.url}${!callData.params ? (params ? Object.values(params).join('/') : '') : `?${paramsString}`}`
-
-      const reqURL = `${config.apiUrl}/goat`
-
-
+      console.log('calldata', callData)
 
       const res = await axios({
-        url: reqURL,
-        method: 'POST',
+        url: `${!mock ? config.apiUrl + callData.url : callData.url}${!callData.params ? (params ? Object.values(params).join('/') : '') : `?${paramsString}`}`,
+        method,
         data: callData,
         headers: {
           ...headers,
           ...(withToken
-            ? {
+              ? {
                 Authorization: `Bearer ${localStorage.getItem('access_token')}`,
               }
-            : {}),
+              : {}),
         },
       })
-      console.log('response ===========', res)
-
       setRawResponse(res)
       setIsLoading(false)
       setResponse(res.data)
