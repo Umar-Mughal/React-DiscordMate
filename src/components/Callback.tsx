@@ -40,7 +40,7 @@ const Callback: FC = (): JSX.Element => {
         //     },
         // );
 
-        console.log("callback response-------------", response)
+        console.log("callback response-------------", response.json())
 
     }
 
