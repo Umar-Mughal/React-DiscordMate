@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { config } from '../config'
 import { IUseApiProps } from '../types/IUseApi'
+import {SERVER_URL} from "../utils/constants";
 
 const useApi = ({ url, method, data, headers, onSuccess, onError, autoFetch, mock, withToken, params }: IUseApiProps) => {
   const [response, setResponse] = useState<any>(null)
   const [error, setError] = useState<any>(null)
   const [loading, setIsLoading] = useState<boolean>(false)
   const [rawResponse, setRawResponse] = useState<any>(null)
-  if (!config.apiUrl) throw new Error(`No backend api found for ${config.apiUrl}`)
+  if (!SERVER_URL) throw new Error(`No backend api found for ${config.apiUrl}`)
 
   const call = async (callData?: any) => {
     setIsLoading(true)
@@ -17,10 +18,8 @@ const useApi = ({ url, method, data, headers, onSuccess, onError, autoFetch, moc
           .map(([key, value]) => `${key}=${value}`)
           .join('&')
 
-      console.log('calldata', callData)
-
       const res = await axios({
-        url: `${!mock ? config.apiUrl + callData.url : callData.url}${!callData.params ? (params ? Object.values(params).join('/') : '') : `?${paramsString}`}`,
+        url: `${!mock ? SERVER_URL + callData.url : callData.url}${!callData.params ? (params ? Object.values(params).join('/') : '') : `?${paramsString}`}`,
         method,
         data: callData,
         headers: {
