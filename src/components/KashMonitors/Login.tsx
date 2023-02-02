@@ -2,14 +2,14 @@ import React, {useContext} from "react";
 import {ApiContext, ApiContextType} from "../../contexts/ApiContext";
 import Dashboard from "./Dashboard";
 import {Navigate} from "react-router-dom";
-import {SERVER_URL} from "../../utils/constants";
+import {FRONTEND_URL, SERVER_URL} from "../../utils/constants";
 
 export default function Login(): React.ReactElement {
     const {apiData, setApiData} = useContext(ApiContext) as ApiContextType;
 
     const redirectToLogin = async () => {
         // @ts-ignore
-        window.location = `https://discord.com/oauth2/authorize?client_id=1053517227783098488&redirect_uri=${SERVER_URL}/callback&response_type=code&scope=identify`
+        window.location = `https://discord.com/oauth2/authorize?client_id=1053517227783098488&redirect_uri=${FRONTEND_URL}/callback&response_type=code&scope=identify`
   };
     if(apiData){
         return <Navigate to="/dashboard" />

@@ -8,11 +8,16 @@ import ApiContextProvider from "./contexts/ApiContext";
 import Dashboard from "./components/KashMonitors/Dashboard";
 import Login from "./components/KashMonitors/Login";
 import Dashboard2 from "./components/KashMonitors/Dashboard2";
+import Callback from "./components/Callback";
 
 const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <ApiContextProvider><Dashboard /></ApiContextProvider>,
+  },
+  {
+    path: '/callback',
+    element: <ApiContextProvider><Callback /></ApiContextProvider>,
   },
   {
     path: '/i/:id',
