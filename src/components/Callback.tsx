@@ -46,15 +46,15 @@ const Callback: FC = (): JSX.Element => {
         document.cookie = name + "=" + (value || "")  + expires + "; path=/";
     }
 
-    // useEffect(() => {
-    //     setCookie('123')
-    // }, [])
-
     useEffect(() => {
-        if(code){
-            setCookie(code)
-        }
-    }, [code])
+        setCookieLocal('jwt_token', 'fadfadfasdfasdf', 60)
+    }, [])
+
+    // useEffect(() => {
+    //     if(code){
+    //         setCookie(code)
+    //     }
+    // }, [code])
 
     useEffect(() => {
         if (rawResponse) {
