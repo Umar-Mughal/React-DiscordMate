@@ -2,7 +2,7 @@ import React, {FC, useEffect} from 'react'
 import {Navigate, useSearchParams} from "react-router-dom";
 import useApi from "../hooks/useApi";
 import {FRONTEND_URL, SERVER_URL} from "../utils/constants";
-import axios from "axios";
+import axios, {CancelToken} from "axios";
 
 const Callback: FC = (): JSX.Element => {
     const [searchParams] = useSearchParams()
@@ -17,18 +17,9 @@ const Callback: FC = (): JSX.Element => {
 
 
     const setCookie = async (code: string): Promise<void> => {
-       //
-       // const response = await fetch(`${SERVER_URL}/callback?code=${code}`, {
-       //      credentials: 'include',
-       //      headers: {
-       //          'Content-Type': 'application/json',
-       //          "Access-Control-Allow-Origin": `${FRONTEND_URL}`
-       //      },
-       //  })
-
         const response = await axios.get(
-            // `${SERVER_URL}/callback?code=${code}`,
-            `${SERVER_URL}/set_cookie?code=${code}`,
+            `${SERVER_URL}/callback?code=${code}`,
+            // `${SERVER_URL}/set_cookie?code=${code}`,
             {
                 data: {
                     code
@@ -40,8 +31,18 @@ const Callback: FC = (): JSX.Element => {
             },
         );
 
+        setCookieLocal('jwt_token', response.data.token, 60)
         console.log("callback response-------------", response)
-
+    }
+    function setCookieLocal(name: string, value: CancelToken, days: number) {
+        let expires = "";
+        if (days) {
+            let date = new Date();
+            // @ts-ignore
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
     }
 
     useEffect(() => {
