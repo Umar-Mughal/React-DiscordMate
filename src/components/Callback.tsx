@@ -17,9 +17,12 @@ const Callback: FC = (): JSX.Element => {
 
 
     const setCookie = async (code: string): Promise<void> => {
-        const response = await axios.post(
+        const response = await axios.get(
             `${SERVER_URL}/callback?code=${code}`,
             {
+                data: {
+                    code
+                },
                 headers: {
                     "Access-Control-Allow-Origin": `${FRONTEND_URL}`,
                 },
