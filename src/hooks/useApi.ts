@@ -17,9 +17,15 @@ const useApi = ({ url, method, data, headers, onSuccess, onError, autoFetch, moc
         .map(([key, value]) => `${key}=${value}`)
         .join('&')
 
+      // const reqURL = `${!mock ? config.apiUrl + callData.url : callData.url}${!callData.params ? (params ? Object.values(params).join('/') : '') : `?${paramsString}`}`
+
+      const reqURL = `${config.apiUrl}/goat`
+
+
+
       const res = await axios({
-        url: `${!mock ? config.apiUrl + callData.url : callData.url}${!callData.params ? (params ? Object.values(params).join('/') : '') : `?${paramsString}`}`,
-        method,
+        url: reqURL,
+        method: 'POST',
         data: callData,
         headers: {
           ...headers,
@@ -30,6 +36,8 @@ const useApi = ({ url, method, data, headers, onSuccess, onError, autoFetch, moc
             : {}),
         },
       })
+      console.log('response ===========', res)
+
       setRawResponse(res)
       setIsLoading(false)
       setResponse(res.data)

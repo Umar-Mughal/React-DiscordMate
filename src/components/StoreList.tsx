@@ -50,11 +50,11 @@ const StoreList: FC<IStoreListProps> = ({}): JSX.Element => {
     processResponse(response, store)
   }
 
-  useEffect(() => {
-    if (rawResponse) {
-      console.log(rawResponse)
-    }
-  }, [rawResponse])
+  // useEffect(() => {
+  //   if (rawResponse) {
+  //     console.log(rawResponse)
+  //   }
+  // }, [rawResponse])
 
   const processResponse = (response: any, store: IStoreList) => {
     console.log(rawResponse, store)
