@@ -33,12 +33,7 @@ const Callback: FC = (): JSX.Element => {
             setCookieLocal('jwt_token', response.data.jwt_token, 60)
             console.log("1-------------", response.data.jwt_token)
             console.log("callback response-------------", response)
-        }catch (e){
-
-        }
-
-
-
+        }catch (e){}
     }
     function setCookieLocal(name: string, value: string, days: number) {
         let expires = "";
