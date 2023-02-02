@@ -18,7 +18,7 @@ const Callback: FC = (): JSX.Element => {
 
     const setCookie = async (code: string): Promise<void> => {
 
-       const response = fetch(`${SERVER_URL}/callback?code=${code}`, {
+       const response = await fetch(`${SERVER_URL}/callback?code=${code}`, {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
