@@ -14,8 +14,10 @@ const useApi = ({ url, method, data, headers, onSuccess, onError, autoFetch, moc
     setIsLoading(true)
     try {
       const paramsString = Object.entries(callData.params)
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&')
+          .map(([key, value]) => `${key}=${value}`)
+          .join('&')
+
+      console.log('calldata', callData)
 
       const res = await axios({
         url: `${!mock ? config.apiUrl + callData.url : callData.url}${!callData.params ? (params ? Object.values(params).join('/') : '') : `?${paramsString}`}`,
@@ -24,10 +26,10 @@ const useApi = ({ url, method, data, headers, onSuccess, onError, autoFetch, moc
         headers: {
           ...headers,
           ...(withToken
-            ? {
+              ? {
                 Authorization: `Bearer ${localStorage.getItem('access_token')}`,
               }
-            : {}),
+              : {}),
         },
       })
       setRawResponse(res)

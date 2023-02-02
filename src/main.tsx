@@ -7,11 +7,16 @@ import './index.css'
 import ApiContextProvider from "./contexts/ApiContext";
 import Dashboard from "./components/KashMonitors/Dashboard";
 import Login from "./components/KashMonitors/Login";
+import Dashboard2 from "./components/KashMonitors/Dashboard2";
 
 const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <ApiContextProvider><Dashboard /></ApiContextProvider>,
+  },
+  {
+    path: '/i/:id',
+    element: <ApiContextProvider><Dashboard2 /></ApiContextProvider>,
   },
   {
     path: '/login',

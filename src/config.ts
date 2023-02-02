@@ -1,3 +1,5 @@
+import {SERVER_URL} from "./utils/constants";
+
 export const config = {
-  apiUrl: 'https://ksh.dev/i/',
+  apiUrl: `${SERVER_URL}/i/`,
 }
