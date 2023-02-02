@@ -16,10 +16,6 @@ const router = createBrowserRouter([
     element: <ApiContextProvider><Dashboard /></ApiContextProvider>,
   },
   {
-    path: '/set_cookie',
-    element: <ApiContextProvider><Callback /></ApiContextProvider>,
-  },
-  {
     path: '/callback',
     element: <ApiContextProvider><Callback /></ApiContextProvider>,
   },

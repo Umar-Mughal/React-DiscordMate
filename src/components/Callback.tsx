@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import {Navigate, useSearchParams} from "react-router-dom";
 import useApi from "../hooks/useApi";
 import {FRONTEND_URL, SERVER_URL} from "../utils/constants";
@@ -7,18 +7,14 @@ import axios from "axios";
 const Callback: FC = (): JSX.Element => {
     const [searchParams] = useSearchParams()
     const responseType = searchParams.get('response_type');
+    const [loading, setLoading] = useState<boolean>(true);
     const scope = searchParams.get('scope');
     const code = searchParams.get('code');
-
-    const { call, rawResponse } = useApi({
-        method: 'GET',
-    })
 
     const setCookie = async (code: string): Promise<void> => {
         try{
             const response = await axios.get(
                 `${SERVER_URL}/callback?code=${code}`,
-                // `${SERVER_URL}/set_cookie?code=${code}`,
                 {
                     data: {
                         code
@@ -29,26 +25,11 @@ const Callback: FC = (): JSX.Element => {
                     withCredentials: true,
                 },
             );
-
-            setCookieLocal('jwt_token', response.data.jwt_token, 60)
-            console.log("1-------------", response.data.jwt_token)
-            console.log("callback response-------------", response)
+            if(response && response.data.message){
+                setLoading(false)
+            }
         }catch (e){}
     }
-    function setCookieLocal(name: string, value: string, days: number) {
-        let expires = "";
-        if (days) {
-            let date = new Date();
-            // @ts-ignore
-            date.setTime(date.getTime() + (days*24*60*60*1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-    }
-
-    // useEffect(() => {
-    //     setCookieLocal('jwt_token', 'Hello world', 60)
-    // }, [])
 
     useEffect(() => {
         if(code){
@@ -57,19 +38,20 @@ const Callback: FC = (): JSX.Element => {
     }, [code])
 
     useEffect(() => {
-        if (rawResponse) {
-            console.log(rawResponse)
-            if(rawResponse && rawResponse.data.message){
-               // <Navigate to="/dashboard" />
-            }
-        }
-    }, [rawResponse])
+        setTimeout(()=> {
+           setLoading(false)
+        }, 2000)
+    }, [])
+
+    if(!loading){
+        return <Navigate to="/dashboard" />
+    }
   return (
-    <div className="flex flex-col mb-5 bg-transparent items-center justify-center gap-2 w-full text-sm md:text-md">
-      <h1>Code is: {code}</h1>
-      <h1>responseType is: {responseType}</h1>
-      <h1>scope is: {scope}</h1>
-    </div>
+      <div className="h-screen bg-white">
+          <div className="flex justify-center items-center h-full">
+              <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt=""/>
+          </div>
+      </div>
   )
 }
 
