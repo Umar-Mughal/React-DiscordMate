@@ -1,6 +1,6 @@
 import React, {createContext, useEffect, useState} from "react";
 import {FRONTEND_URL, SERVER_URL} from "../utils/constants";
-import axios from "axios/index";
+import axios from "axios";
 
 export type ApiContextType = {
     apiData: null | any
