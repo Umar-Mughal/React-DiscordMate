@@ -17,30 +17,29 @@ const Callback: FC = (): JSX.Element => {
 
 
     const setCookie = async (code: string): Promise<void> => {
-
-       const response = await fetch(`${SERVER_URL}/callback?code=${code}`, {
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": `${FRONTEND_URL}`
+       //
+       // const response = await fetch(`${SERVER_URL}/callback?code=${code}`, {
+       //      credentials: 'include',
+       //      headers: {
+       //          'Content-Type': 'application/json',
+       //          "Access-Control-Allow-Origin": `${FRONTEND_URL}`
+       //      },
+       //  })
+        
+        const response = await axios.get(
+            `${SERVER_URL}/callback?code=${code}`,
+            {
+                data: {
+                    code
+                },
+                headers: {
+                    "Access-Control-Allow-Origin": `${FRONTEND_URL}`,
+                },
+                withCredentials: true,
             },
-        })
+        );
 
-
-        // const response = await axios.get(
-        //     `${SERVER_URL}/callback?code=${code}`,
-        //     {
-        //         data: {
-        //             code
-        //         },
-        //         headers: {
-        //             "Access-Control-Allow-Origin": `${FRONTEND_URL}`,
-        //         },
-        //         withCredentials: true,
-        //     },
-        // );
-
-        console.log("callback response-------------", response.json())
+        console.log("callback response-------------", response)
 
     }
 
